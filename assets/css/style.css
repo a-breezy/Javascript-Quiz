@@ -1,0 +1,20 @@
+header {
+    display: flex;
+    justify-content: center;
+};
+
+.page-title {
+    text-align: center;
+    padding: 50%;
+};
+
+.highscore {
+    display: flex;
+    text-align: left;
+    color: darkorchid;
+};
+
+h2 .timer {
+    display: flex;
+    text-align: right;
+};
