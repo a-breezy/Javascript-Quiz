@@ -1,20 +1,59 @@
+:root {
+    --primary: #0B0B3B;
+    --secondary: #FF0080;
+    --tertiary: #FF0000;
+}
+
 header {
     display: flex;
-    justify-content: center;
-};
+    align-items: center;
+    justify-content: space-around;
+
+}
+
+body {
+    font-size: 20px;
+}
+
+footer {
+    text-align: center;
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+    justify-content: space-between;
+}
 
 .page-title {
     text-align: center;
-    padding: 50%;
-};
+    justify-content: center;
+}
 
-.highscore {
-    display: flex;
-    text-align: left;
-    color: darkorchid;
-};
+.highscore-btn {
+    vertical-align: center;
+    justify-content: left;
+    color:var(--secondary);
+    border: none;
+    background: none;
+}
 
-h2 .timer {
+.timer {
+    text-align: center;
+    justify-content: right;
+}
+
+.start-area {
     display: flex;
-    text-align: right;
-};
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+p .start-area {
+    flex-direction: column;
+}
+
+.start-button {
+    color: blue;
+    text-align: center;
+    background-color: antiquewhite;
+}
