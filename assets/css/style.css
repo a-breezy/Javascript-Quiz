@@ -11,14 +11,21 @@ header {
 
 }
 
-body {
+body {    
     font-size: 20px;
+}
+
+section {
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    height: 80vh;
 }
 
 footer {
     text-align: center;
     display: flex;
-    min-height: 100vh;
+    min-height: 100%;
     flex-direction: column;
     justify-content: space-between;
 }
