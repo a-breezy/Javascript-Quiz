@@ -1,66 +1,70 @@
 :root {
-    --primary: #0B0B3B;
-    --secondary: #FF0080;
-    --tertiary: #FF0000;
+  --primary: #0b0b3b;
+  --secondary: #ff0080;
+  --tertiary: #ff0000;
 }
 
 header {
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
 }
 
-body {    
-    font-size: 20px;
+body {
+  font-size: 20px;
 }
 
 section {
-    justify-content: center;
-    align-items: center;
-    display: flex;
-    height: 80vh;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  height: 80vh;
 }
 
 footer {
-    text-align: center;
-    display: flex;
-    min-height: 100%;
-    flex-direction: column;
-    justify-content: space-between;
+  text-align: center;
+  display: flex;
+  min-height: 100%;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .page-title {
-    text-align: center;
-    justify-content: center;
+  text-align: center;
+  justify-content: center;
+}
+
+.hide {
+  display: none;
 }
 
 .highscore-btn {
-    vertical-align: center;
-    justify-content: left;
-    color:var(--secondary);
-    border: none;
-    background: none;
+  vertical-align: center;
+  justify-content: left;
+  color: var(--secondary);
+  border: solid 5px rgb(77, 35, 35);
+  background: none;
+  font-size: 20px;
 }
 
 .timer {
-    text-align: center;
-    justify-content: right;
+  text-align: center;
+  justify-content: right;
 }
 
 .start-area {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
 }
 p .start-area {
-    flex-direction: column;
+  flex-direction: column;
 }
 
 .start-button {
-    color: blue;
-    text-align: center;
-    background-color: antiquewhite;
+  color: blue;
+  text-align: center;
+  background-color: antiquewhite;
 }

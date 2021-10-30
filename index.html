@@ -1,39 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>JavaScript Quiz</title>
-    <link rel="stylesheet" href="./assets/css/style.css">
-</head>
+    <link rel="stylesheet" href="./assets/css/style.css" />
+  </head>
 
-<body>
+  <body>
     <header>
-        <div>
-            <button class="highscore-btn" id="highscoreBtn">View HighScore</button>
-        </div>
-        <h1 class="page-title">JavaScript Quiz</h1>
-        <h4 class="timer" id="countdownTimer">Time Left: </h4>
+      <div>
+        <button class="highscore-btn" id="highscoreBtn">View HighScore</button>
+      </div>
+      <h1 class="page-title">JavaScript Quiz</h1>
+      <h4 class="timer">Time Left: <span id="countdownTimer"></span></h4>
     </header>
 
     <section>
-        <div class="start-area">
-            <p>You're about to take a quiz in JavaScript<br/>Are you Ready?</p>
-            <div class="start-button">
-                <button type="button" class="start-button" id="startBtn">Start Quiz</button>
-            </div>
-            </form>
+      <div class="start-area">
+        <p>You're about to take a quiz in JavaScript<br />Are you Ready?</p>
+        <div class="start-button">
+          <button type="button" class="start-button" id="startBtn">
+            Start Quiz
+          </button>
         </div>
+        <div class="question-container">questions go here</div>
+      </div>
     </section>
 
-    <footer>
-            &copy;2021 by A.Wilkins
-    </footer>
+    <footer>&copy;2021 by A.Wilkins</footer>
 
-    <script src="./assets/js/quiz.js">
-    </script>
-</body>
-
+    <script src="./assets/js/quiz.js"></script>
+  </body>
 </html>
