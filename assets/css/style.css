@@ -34,10 +34,6 @@ footer {
   justify-content: center;
 }
 
-.hide {
-  display: none;
-}
-
 .highscore-btn {
   vertical-align: center;
   justify-content: left;
@@ -67,4 +63,20 @@ p .start-area {
   color: blue;
   text-align: center;
   background-color: antiquewhite;
+}
+
+.hide {
+  display: none;
+}
+
+.question-container {
+  text-align: center;
+}
+
+.question {
+  font-size: 20px;
+}
+
+.question-list {
+  border: darkblue solid 2px;
 }
