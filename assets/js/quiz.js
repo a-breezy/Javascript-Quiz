@@ -1,6 +1,6 @@
 // querySelectors of HTML
 var highscoreButtonEl = document.querySelector("#highscoreBtn");
-var questionContainer = document.querySelector(".question-container");
+var questionArea = document.querySelector(".question-area");
 var startButtonEl = document.querySelector("#startBtn");
 var startDiv = document.querySelector(".start-area");
 var timerEl = document.querySelector("#countdownTimer");
@@ -112,9 +112,10 @@ var questionsArr = [
 var timeLeft = function () {
   document.getElementById("countdownTimer").textContent = timer;
   timer--;
-  console.log(timer);
 
+  // timer doesnt stop at 0
   if (timer === 0) {
+    clearTimeout(timer);
     gameOver();
     window.alert("Game Over");
   } else if (currentQuestionIndex === questionsArr.length) {
@@ -125,8 +126,8 @@ var timeLeft = function () {
 
 var startQuiz = function () {
   var randomQuestion = questionsArr.sort(() => Math.random());
-  setInterval(timeLeft, 1000);
   var currentQuestionIndex = 0;
+  setInterval(timeLeft, 1000);
   showQuestion();
 };
 
@@ -135,35 +136,57 @@ var showNextQuestion = function () {
 };
 
 var showQuestion = function () {
-  // hide startDiv
+  // hide div with start button
   startDiv.classList.add("hide");
 
-  // post question as innerText
+  // creates a new div to house questions and answers
+  var questionContainer = document.createElement("div");
+  questionContainer.className = "questionContainer";
+  questionArea.appendChild(questionContainer);
+  console.log(questionContainer);
+
+  // creates a div to post question as innerText
   var postQuestion = document.createElement("div");
-  postQuestion.className = "question";
   postQuestion.textContent = questionsArr[currentQuestionIndex].question;
-  document.currentQuestionIndex.appendChild(postQuestion);
+  postQuestion.className = "question";
+  questionContainer.appendChild(postQuestion);
 
-  // post answers as clickable innertext with border
-  var postAnswerList = document.createElement("div");
-  postAnswerList.className = "question-list";
-  postAnswerList.textContent = questionsArr[currentQuestionIndex].answerList[0];
-  currentQuestionIndex.appendChild(postAnswerList);
+  var createQuestionBox = function () {
+    // create var to hold length of answerList array
+    var answerListLength = questionsArr[currentQuestionIndex].answerList.length;
 
-  //   questionContainer.innerText =
-  //     questionsArr[currentQuestionIndex].answerList[0];
-  //   questionContainer.innerText =
-  //     questionsArr[currentQuestionIndex].answerList[1];
-  //   questionContainer.innerText =
-  //     questionsArr[currentQuestionIndex].answerList[2];
-  //   questionContainer.innerText =
-  //     questionsArr[currentQuestionIndex].answerList[3];
+    // loops through answerList array, creating each question in the process
+    for (var i = 0; i < answerListLength; i++) {
+      // creates new div to house question[i]
+      var postAnswerList = document.createElement("div");
+      // posts answer option [i] as clickable button
+      postAnswerList.textContent =
+        questionsArr[currentQuestionIndex].answerList[i];
+      // gives answer [i] class
+      postAnswerList.className = "question-list";
+      questionContainer.appendChild(postAnswerList);
+    }
+    // make each div a clickable container
+    var questionList = document.querySelector("question-list");
+    console.log("question-list");
+    questionList.addEventListener("click", function() {
+        // if statement for if correct to save localstorage as true
+        if()
+    });
+    // function to move on to next question
+    questionList.addEventListener("click", function() {
+
+    });
+    // create if statement where if clicked container is the same as
+    // correctAnswer the answer is saved as true.
+    // then move on to the next question
+  };
+  createQuestionBox();
 };
 
 var gameOver = function () {
-  clearInterval(timer);
+  // clearInterval(timer);
   // }
-
   //if timer > 0:
   //     if (timer > 10000) {
   //         // loop through iterations of questions
@@ -176,7 +199,6 @@ var gameOver = function () {
   //     else {
   //         console.log("game over");
   //     }
-
   // function to post question and save answer (looped in quizStart())
   // var questionsLoop = function(question) {
   // go through each questions object
@@ -195,6 +217,7 @@ var createCurrentQuestionIndex = function () {
   }
 };
 
+// function to get and save user initials to localStorage for highscore
 var userName = function () {
   var name = prompt("What are your initials");
   console.log(name);
@@ -203,7 +226,6 @@ var userName = function () {
 // START
 //function() parameter is placeholder for startQuiz() once complete
 startButtonEl.addEventListener("click", function () {
-  console.log("start button");
   startQuiz();
 });
 

@@ -75,8 +75,11 @@ p .start-area {
 
 .question {
   font-size: 20px;
+  font-weight: bold;
+  text-align: center;
 }
 
 .question-list {
   border: darkblue solid 2px;
+  margin: 2%;
 }
