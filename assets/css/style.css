@@ -43,6 +43,10 @@ footer {
   font-size: 20px;
 }
 
+.highscore-btn:hover {
+  background-color: rgba(239, 139, 191, 0.8);
+}
+
 .timer {
   text-align: center;
   justify-content: right;
@@ -82,4 +86,8 @@ p .start-area {
 .question-list {
   border: darkblue solid 2px;
   margin: 2%;
+}
+
+.question-list:hover {
+  background-color: rgba(95, 104, 160, 0.8);
 }
