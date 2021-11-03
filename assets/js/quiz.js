@@ -125,15 +125,15 @@ var timeLeft = function () {
 };
 
 var startQuiz = function () {
-  var randomQuestion = questionsArr.sort(() => Math.random());
-  var currentQuestionIndex = questionsArr[0];
+  //   var randomQuestion = questionsArr.sort(() => Math.random());
+  //   var currentQuestionIndex = questionsArr[0];
   setInterval(timeLeft, 1000);
   showQuestion();
 };
 
-var showNextQuestion = function () {
-  showQuestion(randomQuestion[currentQuestionIndex]);
-};
+// var showNextQuestion = function () {
+//   showQuestion(randomQuestion[currentQuestionIndex]);
+// };
 
 var showQuestion = function () {
   // hide div with start button
@@ -165,34 +165,55 @@ var showQuestion = function () {
       postAnswerList.id = "question-list" + [i];
       console.log("question-list" + [i]);
       questionContainer.appendChild(postAnswerList);
+
+      postAnswerList.addEventListener("click", function () {
+        console.log("here");
+        console.log(questionsArr[currentQuestionIndex].correctAnswer);
+
+        console.log(postAnswerList.textContent);
+        if (
+          questionsArr[currentQuestionIndex].correctAnswer ==
+          postAnswerList.textContent
+        ) {
+          score += 10;
+          // go onto next question
+          currentQuestionIndex++;
+          showQuestion();
+        } else {
+          timer -= 10;
+          showQuestion();
+        }
+      });
+
+      //   NEXT STEP IS TO MAKE THE showNextQuestion() function that shows another question while getting rid of first question
+
+      // // make each question div a button
+      // var questionList = document.getElementById("question-list" + [i]);
+      // questionList.addEventListener("click", function () {
+
+      // });
     };
 
-    // make each question div a button
-    var questionList = document.getElementById("question-list" + [i]);
-    questionList.addEventListener("click", function () {});
-
-    // function to save data to localStorage
-    var saveScore = function () {
-      // if clicked answerList == correctAnswer
-      if (questionsArr.correctAnswer == questionList) {
-        // store 10 points in localStorage
-        localStorage.setItem(10);
-        // go onto next question
-        currentQuestionIndex++;
-        showQuestion();
-      } else {
-        // subtract 10 seconds from timer
-        timer -= 10;
-        //got on to next question
-        currentQuestionIndex++;
-        showQuestion();
-      }
-    };
+    // // function to save data to localStorage
+    // var saveScore = function () {
+    //   // if clicked answerList == correctAnswer
+    //   if (questionsArr.correctAnswer == questionList) {
+    //     score += 10;
+    //     // go onto next question
+    //     currentQuestionIndex++;
+    //     showQuestion();
+    //   } else {
+    //     // subtract 10 seconds from timer
+    //     timer -= 10;
+    //     //got on to next question
+    //     currentQuestionIndex++;
+    //     showQuestion();
+    //   }
+    // };
 
     // loops through answerList array, creating each question in the process
     for (var i = 0; i < answerListLength; i++) {
       createAnswerList();
-      saveScore();
     }
   };
   createQuestionBox();
@@ -201,6 +222,8 @@ var showQuestion = function () {
 var gameOver = function () {
   // clearInterval(timer);
   // }
+
+  // set score in localStorage
   userName();
 };
 
