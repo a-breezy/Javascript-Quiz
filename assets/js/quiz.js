@@ -14,86 +14,91 @@ var timer = 90;
 
 // create a list of questions and set as an array with properties: index, question, correct answer
 var questionsArr = [
-  // {
-  //   question: "What does 'DOM' stand for?",
-  //   answerList: [
-  //     "A. Direct Object Method",
-  //     "B. Direct Occuring Method",
-  //     "C. Document Object Model",
-  //     "D. Document Occuring Measure",
-  //   ],
-  //   correctAnswer: "C. Document Object Model"],
-  // },
-  // {
-  //   question: "How does Control Flow Work?",
-  //   answerList: [
-  //     "A. Control Flow creates conditional statements to decide how to proceed",
-  //     "B. Control Flow determins how the browser should interpret the code",
-  //     "C. Control Flow accepts users input and terminates the program",
-  //     "D. Control Flow is like a dam slowing down the browser's speed",
-  //   ],
-  //   correctAnswer: "A. Control Flow creates conditional statements to decide how to proceed",
-  // },
-  // {
-  //   question: "What operator do you use to set equality?",
-  //   answerList: ["A. ||", "B. ===", "C. &&", "D. =="],
-  //   correctAnswer: "B. ===",
-  // },
-  // {
-  //   question: "How does Pseudocode enhance code?",
-  //   answerList: [
-  //     "A. Put's computer languge into human language",
-  //     "B. Comments code to make it more readable",
-  //     "C. Describes steps for an application to follow",
-  //     "D. All Of The Above",
-  //   ],
-  //   correctAnswer: "D. All Of The Above",
-  // },
-  // {
-  //   question: "How do parameters effect functions",
-  //   answerList: [
-  //     "A. They make functions more efficient",
-  //     "B. When set, parameters confine functions to particular tasks",
-  //     "C. They are placeholders for arguments that will be passed into the function",
-  //     "D. Parameters are not related to functions at all",
-  //   ],
-  //   correctAnswer: "C. They are placeholders for arguments that will be passed into the function",
-  // },
-  // {
-  //   question: "What is scope",
-  //   answerList: [
-  //     "A. Scope is where functions are accessible from",
-  //     "B. Scope is something that you look through to see things far away",
-  //     "C. Scope is a way to determine a variables functionality",
-  //     "D. Answers A and C",
-  //   ],
-  //   correctAnswer: "D. Answers A and C",
-  // },
-  // {
-  //   question: "Fill in the blank: ___(var 1 = 0; i < 5; i++)",
-  //   answerList: ["A. for", "B. if", "C. Switch", "D. var"],
-  //   correctAnswer: "A. for",
-  // },
-  // {
-  //   question: "How does 'Math' assist JavaScript Users",
-  //   answerList: [
-  //     "A. 'Math' acts as a calculator",
-  //     "B. 'Math' is a number of built in functions which give the user various functionalities",
-  //     "C. Without 'Math' the user would only be able to use conditional statements",
-  //     "D. 'Math' lets the user conver numbered strings to integer variables",
-  //   ],
-  //   correctAnswer: "B. 'Math' is a number of built in functions which give the user various functionalities",
-  // },
-  // {
-  //   question: "How does DOM allow greater functionality",
-  //   answerList: [
-  //     "A. DOM increases memory allocation allowing the browser render images faster",
-  //     "B. DOM let's the user iterate through JavaScript functions",
-  //     "C. DOM is a representation of the html making it manipulatable by JavaScript",
-  //     "D. DOM condenses code into a file that's easier than HTML to read",
-  //   ],
-  //   correctAnswer: "C. DOM is a representation of the html making it manipulatable by JavaScript",
-  // },
+  {
+    question: "What does 'DOM' stand for?",
+    answerList: [
+      "A. Direct Object Method",
+      "B. Direct Occuring Method",
+      "C. Document Object Model",
+      "D. Document Occuring Measure",
+    ],
+    correctAnswer: "C. Document Object Model",
+  },
+
+  {
+    question: "How does Control Flow Work?",
+    answerList: [
+      "A. Control Flow creates conditional statements to decide how to proceed",
+      "B. Control Flow determins how the browser should interpret the code",
+      "C. Control Flow accepts users input and terminates the program",
+      "D. Control Flow is like a dam slowing down the browser's speed",
+    ],
+    correctAnswer:
+      "A. Control Flow creates conditional statements to decide how to proceed",
+  },
+  {
+    question: "What operator do you use to set equality?",
+    answerList: ["A. ||", "B. ===", "C. &&", "D. =="],
+    correctAnswer: "B. ===",
+  },
+  {
+    question: "How does Pseudocode enhance code?",
+    answerList: [
+      "A. Put's computer languge into human language",
+      "B. Comments code to make it more readable",
+      "C. Describes steps for an application to follow",
+      "D. All Of The Above",
+    ],
+    correctAnswer: "D. All Of The Above",
+  },
+  {
+    question: "How do parameters effect functions",
+    answerList: [
+      "A. They make functions more efficient",
+      "B. When set, parameters confine functions to particular tasks",
+      "C. They are placeholders for arguments that will be passed into the function",
+      "D. Parameters are not related to functions at all",
+    ],
+    correctAnswer:
+      "C. They are placeholders for arguments that will be passed into the function",
+  },
+  {
+    question: "What is scope",
+    answerList: [
+      "A. Scope is where functions are accessible from",
+      "B. Scope is something that you look through to see things far away",
+      "C. Scope is a way to determine a variables functionality",
+      "D. Answers A and C",
+    ],
+    correctAnswer: "D. Answers A and C",
+  },
+  {
+    question: "Fill in the blank: ___(var 1 = 0; i < 5; i++)",
+    answerList: ["A. for", "B. if", "C. Switch", "D. var"],
+    correctAnswer: "A. for",
+  },
+  {
+    question: "How does 'Math' assist JavaScript Users",
+    answerList: [
+      "A. 'Math' acts as a calculator",
+      "B. 'Math' is a number of built in functions which give the user various functionalities",
+      "C. Without 'Math' the user would only be able to use conditional statements",
+      "D. 'Math' lets the user conver numbered strings to integer variables",
+    ],
+    correctAnswer:
+      "B. 'Math' is a number of built in functions which give the user various functionalities",
+  },
+  {
+    question: "How does DOM allow greater functionality",
+    answerList: [
+      "A. DOM increases memory allocation allowing the browser render images faster",
+      "B. DOM let's the user iterate through JavaScript functions",
+      "C. DOM is a representation of the html making it manipulatable by JavaScript",
+      "D. DOM condenses code into a file that's easier than HTML to read",
+    ],
+    correctAnswer:
+      "C. DOM is a representation of the html making it manipulatable by JavaScript",
+  },
   {
     question: "How does localStorage differ from sessionStorage",
     answerList: [
@@ -125,8 +130,7 @@ var timeLeft = function () {
 };
 
 var startQuiz = function () {
-  //   var randomQuestion = questionsArr.sort(() => Math.random());
-  //   var currentQuestionIndex = questionsArr[0];
+  var currentQuestionIndex = questionsArr[0];
   setInterval(timeLeft, 1000);
   showQuestion();
 };
@@ -143,7 +147,6 @@ var showQuestion = function () {
   var questionContainer = document.createElement("div");
   questionContainer.className = "questionContainer";
   questionArea.appendChild(questionContainer);
-  console.log(questionContainer);
 
   // creates a div to post question as innerText
   var postQuestion = document.createElement("div");
@@ -151,26 +154,22 @@ var showQuestion = function () {
   postQuestion.className = "question";
   questionContainer.appendChild(postQuestion);
 
+  // creates a div to hold the possible answers
   var createQuestionBox = function () {
-    // create var to hold length of answerList array
     var answerListLength = questionsArr[currentQuestionIndex].answerList.length;
-    // creates new div to house question[i]
 
+    // creates a div to hold question[i] (index0-3), gives id question-list[i], appends to postAnswerList
     var createAnswerList = function () {
       var postAnswerList = document.createElement("div");
-      // posts answer option [i] as clickable button
       postAnswerList.textContent =
         questionsArr[currentQuestionIndex].answerList[i];
       postAnswerList.className = "question-list";
       postAnswerList.id = "question-list" + [i];
-      console.log("question-list" + [i]);
       questionContainer.appendChild(postAnswerList);
 
+      // when answer is clicked it is compared with correct answer.
       postAnswerList.addEventListener("click", function () {
-        console.log("here");
-        console.log(questionsArr[currentQuestionIndex].correctAnswer);
-
-        console.log(postAnswerList.textContent);
+        // if true (they match) 10 points are added to score and currenQuestionIndex +1
         if (
           questionsArr[currentQuestionIndex].correctAnswer ==
           postAnswerList.textContent
@@ -178,38 +177,28 @@ var showQuestion = function () {
           score += 10;
           // go onto next question
           currentQuestionIndex++;
-          showQuestion();
-        } else {
+          showNextQuestion();
+        }
+        // 10 seconds are subtracted from timer, showNextQuestion()
+        else {
           timer -= 10;
-          showQuestion();
+          currentQuestionIndex++;
+          showNextQuestion();
         }
       });
 
       //   NEXT STEP IS TO MAKE THE showNextQuestion() function that shows another question while getting rid of first question
-
-      // // make each question div a button
-      // var questionList = document.getElementById("question-list" + [i]);
-      // questionList.addEventListener("click", function () {
-
-      // });
+      var showNextQuestion = function () {
+        // remove previous quesiton and run function to add new question at currentQuestionIndex
+        if (currentQuestionIndex < questionsArr.length) {
+          questionContainer.parentNode.removeChild(questionContainer);
+          showQuestion();
+        } else {
+          questionContainer.parentNode.removeChild(questionContainer);
+          gameOver();
+        }
+      };
     };
-
-    // // function to save data to localStorage
-    // var saveScore = function () {
-    //   // if clicked answerList == correctAnswer
-    //   if (questionsArr.correctAnswer == questionList) {
-    //     score += 10;
-    //     // go onto next question
-    //     currentQuestionIndex++;
-    //     showQuestion();
-    //   } else {
-    //     // subtract 10 seconds from timer
-    //     timer -= 10;
-    //     //got on to next question
-    //     currentQuestionIndex++;
-    //     showQuestion();
-    //   }
-    // };
 
     // loops through answerList array, creating each question in the process
     for (var i = 0; i < answerListLength; i++) {
@@ -217,14 +206,6 @@ var showQuestion = function () {
     }
   };
   createQuestionBox();
-};
-
-var gameOver = function () {
-  // clearInterval(timer);
-  // }
-
-  // set score in localStorage
-  userName();
 };
 
 var createCurrentQuestionIndex = function () {
@@ -241,7 +222,24 @@ var createCurrentQuestionIndex = function () {
 var userName = function () {
   var initials = prompt("What are your initials");
   console.log(initials);
-  localStorage.setItem(initials);
+  console.log(score);
+  userScore = [initials, score];
+  console.log(userScore);
+  return;
+};
+
+var gameOver = function () {
+  userName();
+  // set score in localStorage
+  localStorage.setItem("userScore", JSON.stringify(userScore));
+
+  // create div to post question to with button to retake quiz
+  var retakeQuiz = document.createElement("div");
+  retakeQuiz.className = "retake-quiz";
+  questionArea.appendChild(retakeQuiz);
+
+  // add innerhtml text so that a line break occurs 
+  retakeQuiz.textContent = ("User Initials: " + userScore.initials <br/> "Score: " + userScore.score;
 };
 
 // START
@@ -252,7 +250,7 @@ startButtonEl.addEventListener("click", function () {
 
 // function() parameter is placeholder for highscore() once complete
 highscoreButtonEl.addEventListener("click", function () {
-  console.log("highscore");
-  localStorage.getItem(initials);
+  console.log(userScore);
+  JSON.parse(localStorage.getItem("userScore"));
 });
 timerEl.addEventListener("click", timeLeft());
