@@ -117,7 +117,7 @@ var timeLeft = function () {
   if (timer === 0) {
     clearTimeout(timer);
     gameOver();
-    window.alert("Game Over");
+    window.alert("Time Over");
   } else if (currentQuestionIndex === questionsArr.length) {
     clearTimeout(timer);
     document.getElementById("countdownTimer").textContent = 0;
@@ -126,7 +126,7 @@ var timeLeft = function () {
 
 var startQuiz = function () {
   var randomQuestion = questionsArr.sort(() => Math.random());
-  var currentQuestionIndex = 0;
+  var currentQuestionIndex = questionsArr[0];
   setInterval(timeLeft, 1000);
   showQuestion();
 };
@@ -155,6 +155,7 @@ var showQuestion = function () {
     // create var to hold length of answerList array
     var answerListLength = questionsArr[currentQuestionIndex].answerList.length;
     // creates new div to house question[i]
+
     var createAnswerList = function () {
       var postAnswerList = document.createElement("div");
       // posts answer option [i] as clickable button
@@ -166,31 +167,33 @@ var showQuestion = function () {
       questionContainer.appendChild(postAnswerList);
     };
 
+    // make each question div a button
+    var questionList = document.getElementById("question-list" + [i]);
+    questionList.addEventListener("click", function () {});
+
+    // function to save data to localStorage
+    var saveScore = function () {
+      // if clicked answerList == correctAnswer
+      if (questionsArr.correctAnswer == questionList) {
+        // store 10 points in localStorage
+        localStorage.setItem(10);
+        // go onto next question
+        currentQuestionIndex++;
+        showQuestion();
+      } else {
+        // subtract 10 seconds from timer
+        timer -= 10;
+        //got on to next question
+        currentQuestionIndex++;
+        showQuestion();
+      }
+    };
+
     // loops through answerList array, creating each question in the process
     for (var i = 0; i < answerListLength; i++) {
       createAnswerList();
+      saveScore();
     }
-    // make each div a clickable container
-    var questionList = document.getElementById("question-list" + [i]);
-    console.log("question-list" + [i]);
-    questionList.addEventListener("click", function () {
-      // if statement for correct to save localstorage as true
-      if (
-        (questionsArr[currentQuestionIndex].answerList[i] =
-          questionsArr[currentQuestionIndex].correctAnswer)
-      ) {
-        score += 10;
-      }
-      // else subtract 10 seconds and go to next question
-      else {
-        timer -= 10;
-      }
-    });
-    // // function to move on to next question
-    // questionList.addEventListener("click", function () {});
-    // create if statement where if clicked container is the same as
-    // correctAnswer the answer is saved as true.
-    // then move on to the next question
   };
   createQuestionBox();
 };
@@ -199,12 +202,6 @@ var gameOver = function () {
   // clearInterval(timer);
   // }
   userName();
-  // function to post question and save answer (looped in quizStart())
-  // var questionsLoop = function(question) {
-  // go through each questions object
-  // for each question, post question with four clickable containers holding each answer
-  // once an answer is clicked store answer in localStorage
-  // add 15 seconds to the quiz
 };
 
 var createCurrentQuestionIndex = function () {
@@ -214,19 +211,6 @@ var createCurrentQuestionIndex = function () {
 
     // create var to hold length of answerList array
     var answerListLength = questionsArr[currentQuestionIndex].answerList.length;
-
-    // loops through answerList array, creating each question in the process
-    for (var i = 0; i < answerListLength; i++) {
-      // creates new div to house question[i]
-      var postAnswerList = document.createElement("div");
-      // posts answer option [i] as clickable button
-      postAnswerList.textContent =
-        questionsArr[currentQuestionIndex].answerList[i];
-      // gives answer [i] class
-      postAnswerList.className = "question-list" + [i];
-      console.log(postAnswerList.className);
-      questionContainer.appendChild(postAnswerList);
-    }
   }
 };
 
