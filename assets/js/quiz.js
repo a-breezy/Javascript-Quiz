@@ -8,9 +8,8 @@ var timerEl = document.querySelector("#countdownTimer");
 // VARS
 var currentQuestionIndex = 0;
 var lastQuestionIndex = -1;
-var randomQuestion = "";
 var score = 0;
-var timer = 90;
+var timeDisp = 90;
 
 // create a list of questions and set as an array with properties: index, question, correct answer
 var questionsArr = [
@@ -24,7 +23,6 @@ var questionsArr = [
     ],
     correctAnswer: "C. Document Object Model",
   },
-
   {
     question: "How does Control Flow Work?",
     answerList: [
@@ -37,7 +35,7 @@ var questionsArr = [
       "A. Control Flow creates conditional statements to decide how to proceed",
   },
   {
-    question: "What operator do you use to set equality?",
+    question: "What operator do you use to set strict equality?",
     answerList: ["A. ||", "B. ===", "C. &&", "D. =="],
     correctAnswer: "B. ===",
   },
@@ -83,7 +81,7 @@ var questionsArr = [
       "A. 'Math' acts as a calculator",
       "B. 'Math' is a number of built in functions which give the user various functionalities",
       "C. Without 'Math' the user would only be able to use conditional statements",
-      "D. 'Math' lets the user conver numbered strings to integer variables",
+      "D. 'Math' lets the user convert numbered strings to integer variables",
     ],
     correctAnswer:
       "B. 'Math' is a number of built in functions which give the user various functionalities",
@@ -113,99 +111,126 @@ var questionsArr = [
 ];
 
 // FUNCTS
+
 // timer starts at 30 sec and goes down. each finished round adds 10 seconds
-var timeLeft = function () {
-  timerEl.textContent = timer;
-  timer--;
+// var timeLeft = function () {
+//   timerEl.textContent = timer;
+//   timer--;
 
-  // timer doesnt stop at 0 <--
-  if (timer === 0) {
-    clearTimeout(timer);
-    gameOver();
-    window.alert("Time Over");
-  } else if (currentQuestionIndex === questionsArr.length) {
-    clearTimeout(timer);
-    document.getElementById("countdownTimer").textContent = 0;
-  }
-};
-
-var startQuiz = function () {
-  var currentQuestionIndex = questionsArr[0];
-  setInterval(timeLeft, 1000);
-  showQuestion();
-};
-
-// var showNextQuestion = function () {
-//   showQuestion(randomQuestion[currentQuestionIndex]);
+//   // timer doesnt stop at 0 <--
+//   if (timerLeft <= 0) {
+//     clearInterval(timer);
+//     timerEl.textContent = 0;
+//   } else if (currentQuestionIndex === questionsArr.length) {
+//     clearInterval(timer);
+//     timerEl.textContent = 0;
+//   }
 // };
 
-var showQuestion = function () {
-  // hide div with start button
-  startDiv.classList.add("hide");
+// // new timer to fucntion in start quiz
+// var timer = setInterval(function () {
+//   timeDisp--;
 
-  // creates a new div to house questions and answers
-  var questionContainer = document.createElement("div");
-  questionContainer.className = "questionContainer";
-  questionArea.appendChild(questionContainer);
+//   //set timer to stop at 0
+//   if (timer <= 0) {
+//     clearInterval(timer);
+//     timeDisp = 0;
+//   } else if (currentQuestionIndex === questionsArr.length) {
+//     clearInterval(timer);
+//     timeDisp = 0;
+//   }
+// }, 1000);
 
-  // creates a div to post question as innerText
-  var postQuestion = document.createElement("div");
-  postQuestion.textContent = questionsArr[currentQuestionIndex].question;
-  postQuestion.className = "question";
-  questionContainer.appendChild(postQuestion);
+var startQuiz = function () {
+  var timer = setInterval(function () {
+    timerEl.textContent = timeDisp;
+    timeDisp--;
 
-  // creates a div to hold the possible answers
-  var createQuestionBox = function () {
-    var answerListLength = questionsArr[currentQuestionIndex].answerList.length;
-
-    // creates a div to hold question[i] (index0-3), gives id question-list[i], appends to postAnswerList
-    var createAnswerList = function () {
-      var postAnswerList = document.createElement("div");
-      postAnswerList.textContent =
-        questionsArr[currentQuestionIndex].answerList[i];
-      postAnswerList.className = "question-list";
-      postAnswerList.id = "question-list" + [i];
-      questionContainer.appendChild(postAnswerList);
-
-      // when answer is clicked it is compared with correct answer.
-      postAnswerList.addEventListener("click", function () {
-        // if true (they match) 10 points are added to score and currenQuestionIndex +1
-        if (
-          questionsArr[currentQuestionIndex].correctAnswer ==
-          postAnswerList.textContent
-        ) {
-          score += 10;
-          // go onto next question
-          currentQuestionIndex++;
-          showNextQuestion();
-        }
-        // 10 seconds are subtracted from timer, showNextQuestion()
-        else {
-          timer -= 10;
-          currentQuestionIndex++;
-          showNextQuestion();
-        }
-      });
-
-      //   NEXT STEP IS TO MAKE THE showNextQuestion() function that shows another question while getting rid of first question
-      var showNextQuestion = function () {
-        // remove previous quesiton and run function to add new question at currentQuestionIndex
-        if (currentQuestionIndex < questionsArr.length) {
-          questionContainer.parentNode.removeChild(questionContainer);
-          showQuestion();
-        } else {
-          questionContainer.parentNode.removeChild(questionContainer);
-          gameOver();
-        }
-      };
-    };
-
-    // loops through answerList array, creating each question in the process
-    for (var i = 0; i < answerListLength; i++) {
-      createAnswerList();
+    //set timer to stop at 0
+    if (timer <= 0) {
+      clearInterval(timer);
+      timeDisp = 0;
+      gameOver();
     }
+  }, 1000);
+
+  var showQuestion = function () {
+    // hide div with start button
+    startDiv.classList.add("hide");
+
+    // creates a new div to house questions and answers
+    var questionContainer = document.createElement("div");
+    questionContainer.className = "question-container";
+    questionArea.appendChild(questionContainer);
+
+    // creates a div to post question as innerText
+    var postQuestion = document.createElement("div");
+    postQuestion.textContent = questionsArr[currentQuestionIndex].question;
+    postQuestion.className = "question";
+    questionContainer.appendChild(postQuestion);
+
+    // creates a div to hold the possible answers
+    var createQuestionBox = function () {
+      var answerListLength =
+        questionsArr[currentQuestionIndex].answerList.length;
+
+      // creates a div to hold question[i] (index0-3), gives id question-list[i], appends to postAnswerList
+      var createAnswerList = function () {
+        var postAnswerList = document.createElement("div");
+        postAnswerList.textContent =
+          questionsArr[currentQuestionIndex].answerList[i];
+        postAnswerList.className = "question-list";
+        postAnswerList.id = "question-list" + [i];
+        questionContainer.appendChild(postAnswerList);
+
+        // when answer is clicked it is compared with correct answer.
+        postAnswerList.addEventListener("click", function () {
+          // if true (they match) 10 points are added to score and currenQuestionIndex +1
+          if (
+            questionsArr[currentQuestionIndex].correctAnswer ==
+            postAnswerList.textContent
+          ) {
+            score += 10;
+            // go onto next question
+            currentQuestionIndex++;
+            showNextQuestion();
+            console.log(currentQuestionIndex);
+            console.log(score);
+          }
+          // 10 seconds are subtracted from timer, showNextQuestion()
+          else {
+            timeDisp -= 10;
+            currentQuestionIndex++;
+            console.log(currentQuestionIndex);
+            showNextQuestion();
+          }
+        });
+
+        // make showNextQuestion() function that shows another question while getting rid of first question
+        var showNextQuestion = function () {
+          // remove previous quesiton and run function to add new question at currentQuestionIndex
+          if (currentQuestionIndex < questionsArr.length) {
+            questionContainer.parentNode.removeChild(questionContainer);
+            console.log(timeDisp);
+            showQuestion();
+          } else if (
+            (currentQuestionIndex = questionsArr.length || timer <= 0)
+          ) {
+            console.log("ran out of questions or timer = 0");
+            timeDisp = 0;
+            questionContainer.classList.add("hide");
+            gameOver();
+          }
+        };
+      };
+      // loops through answerList array, creating each question in the process
+      for (var i = 0; i < answerListLength; i++) {
+        createAnswerList();
+      }
+    };
+    createQuestionBox();
   };
-  createQuestionBox();
+  showQuestion();
 };
 
 var createCurrentQuestionIndex = function () {
@@ -234,12 +259,17 @@ var gameOver = function () {
   localStorage.setItem("userScore", JSON.stringify(userScore));
 
   // create div to post question to with button to retake quiz
-  var retakeQuiz = document.createElement("div");
-  retakeQuiz.className = "retake-quiz";
-  questionArea.appendChild(retakeQuiz);
+  var afterQuiz = document.createElement("div");
+  afterQuiz.className = "after-quiz";
+  questionArea.appendChild(afterQuiz);
+  // add innerhtml text so that a line break occurs
+  afterQuiz.textContent = "User Initials: " + userScore[0];
 
-  // add innerhtml text so that a line break occurs 
-  retakeQuiz.textContent = ("User Initials: " + userScore.initials <br/> "Score: " + userScore.score;
+  // add text content for userScore
+  var afterQuizScore = document.createElement("p");
+  afterQuizScore.className = "after-quiz";
+  questionArea.appendChild(afterQuizScore);
+  afterQuizScore.textContent = "Score: " + userScore[1];
 };
 
 // START
@@ -253,4 +283,3 @@ highscoreButtonEl.addEventListener("click", function () {
   console.log(userScore);
   JSON.parse(localStorage.getItem("userScore"));
 });
-timerEl.addEventListener("click", timeLeft());

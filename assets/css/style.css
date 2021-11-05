@@ -91,3 +91,7 @@ p .start-area {
 .question-list:hover {
   background-color: rgba(95, 104, 160, 0.8);
 }
+
+.after-quiz {
+  font-size: 25px;
+}
