@@ -117,7 +117,7 @@ var startTime = function () {
     timerEl.textContent = timeDisp;
     timeDisp--;
 
-    if (timeDisp < 0) {
+    if (timeDisp < 0 && !(currentQuestionIndex === questionsArr.length)) {
       clearInterval(timer);
       timerEl.textContent = 0;
       timeDisp = 0;
@@ -207,8 +207,11 @@ var showQuestion = function () {
 // function to get and save user initials to localStorage for highscore
 var userName = function () {
   var initials = prompt("What are your initials");
-  userScore = [initials, score];
-  return;
+  var obj = {
+    name: initials,
+    postScore: score,
+  };
+  userScore.push(obj);
 };
 console.log(JSON.parse(localStorage.getItem(userScore)));
 
@@ -218,13 +221,13 @@ var postUserScore = function () {
   afterQuiz.className = "after-quiz";
   questionArea.appendChild(afterQuiz);
   // add innerhtml text so that a line break occurs
-  afterQuiz.textContent = "User Initials: " + userScore[0];
+  afterQuiz.textContent = "User Initials: " + userScore[0].name;
 
   // add text content for userScore
   var afterQuizScore = document.createElement("p");
   afterQuizScore.className = "after-quiz";
   questionArea.appendChild(afterQuizScore);
-  afterQuizScore.textContent = "Score: " + userScore[1];
+  afterQuizScore.textContent = "Score: " + userScore[0].postScore;
 
   startDiv.classList.remove("hide");
 };
@@ -239,9 +242,7 @@ var gameOver = function () {
 
 // START
 //function() parameter is placeholder for startQuiz() once complete
-startButtonEl.addEventListener("click", function () {
-  startQuiz();
-});
+startButtonEl.addEventListener("click", startQuiz);
 
 // function() parameter is placeholder for highscore() once complete
 highscoreButtonEl.addEventListener("click", function () {
