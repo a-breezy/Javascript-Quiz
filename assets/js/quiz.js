@@ -7,9 +7,9 @@ var timerEl = document.querySelector("#countdownTimer");
 
 // VARS
 var currentQuestionIndex = 0;
-var lastQuestionIndex = -1;
 var score = 0;
 var timeDisp = 90;
+var userScore = [];
 
 // create a list of questions and set as an array with properties: index, question, correct answer
 var questionsArr = [
@@ -111,154 +111,109 @@ var questionsArr = [
 ];
 
 // FUNCTS
-
-// timer starts at 30 sec and goes down. each finished round adds 10 seconds
-// var timeLeft = function () {
-//   timerEl.textContent = timer;
-//   timer--;
-
-//   // timer doesnt stop at 0 <--
-//   if (timerLeft <= 0) {
-//     clearInterval(timer);
-//     timerEl.textContent = 0;
-//   } else if (currentQuestionIndex === questionsArr.length) {
-//     clearInterval(timer);
-//     timerEl.textContent = 0;
-//   }
-// };
-
-// // new timer to fucntion in start quiz
-// var timer = setInterval(function () {
-//   timeDisp--;
-
-//   //set timer to stop at 0
-//   if (timer <= 0) {
-//     clearInterval(timer);
-//     timeDisp = 0;
-//   } else if (currentQuestionIndex === questionsArr.length) {
-//     clearInterval(timer);
-//     timeDisp = 0;
-//   }
-// }, 1000);
-
-var startQuiz = function () {
-  var timer = setInterval(function () {
+var startTime = function () {
+  var timer = setInterval(timeDecrease, 1000);
+  function timeDecrease() {
     timerEl.textContent = timeDisp;
     timeDisp--;
 
-    //set timer to stop at 0
-    if (timer <= 0) {
+    if (timeDisp < 0) {
       clearInterval(timer);
+      timerEl.textContent = 0;
       timeDisp = 0;
+      document.querySelector(".question-container").classList.add("hide");
       gameOver();
     }
-  }, 1000);
+  }
+};
 
-  var showQuestion = function () {
-    // hide div with start button
-    startDiv.classList.add("hide");
-
-    // creates a new div to house questions and answers
-    var questionContainer = document.createElement("div");
-    questionContainer.className = "question-container";
-    questionArea.appendChild(questionContainer);
-
-    // creates a div to post question as innerText
-    var postQuestion = document.createElement("div");
-    postQuestion.textContent = questionsArr[currentQuestionIndex].question;
-    postQuestion.className = "question";
-    questionContainer.appendChild(postQuestion);
-
-    // creates a div to hold the possible answers
-    var createQuestionBox = function () {
-      var answerListLength =
-        questionsArr[currentQuestionIndex].answerList.length;
-
-      // creates a div to hold question[i] (index0-3), gives id question-list[i], appends to postAnswerList
-      var createAnswerList = function () {
-        var postAnswerList = document.createElement("div");
-        postAnswerList.textContent =
-          questionsArr[currentQuestionIndex].answerList[i];
-        postAnswerList.className = "question-list";
-        postAnswerList.id = "question-list" + [i];
-        questionContainer.appendChild(postAnswerList);
-
-        // when answer is clicked it is compared with correct answer.
-        postAnswerList.addEventListener("click", function () {
-          // if true (they match) 10 points are added to score and currenQuestionIndex +1
-          if (
-            questionsArr[currentQuestionIndex].correctAnswer ==
-            postAnswerList.textContent
-          ) {
-            score += 10;
-            // go onto next question
-            currentQuestionIndex++;
-            showNextQuestion();
-            console.log(currentQuestionIndex);
-            console.log(score);
-          }
-          // 10 seconds are subtracted from timer, showNextQuestion()
-          else {
-            timeDisp -= 10;
-            currentQuestionIndex++;
-            console.log(currentQuestionIndex);
-            showNextQuestion();
-          }
-        });
-
-        // make showNextQuestion() function that shows another question while getting rid of first question
-        var showNextQuestion = function () {
-          // remove previous quesiton and run function to add new question at currentQuestionIndex
-          if (currentQuestionIndex < questionsArr.length) {
-            questionContainer.parentNode.removeChild(questionContainer);
-            console.log(timeDisp);
-            showQuestion();
-          } else if (
-            (currentQuestionIndex = questionsArr.length || timer <= 0)
-          ) {
-            console.log("ran out of questions or timer = 0");
-            timeDisp = 0;
-            questionContainer.classList.add("hide");
-            gameOver();
-          }
-        };
-      };
-      // loops through answerList array, creating each question in the process
-      for (var i = 0; i < answerListLength; i++) {
-        createAnswerList();
-      }
-    };
-    createQuestionBox();
-  };
+var startQuiz = function () {
+  startTime();
   showQuestion();
 };
 
-var createCurrentQuestionIndex = function () {
-  // check if we didn't pass all questions yet
-  if (currentQuestionIndex < questionsArr.length) {
-    console.log(questions[currentQuestion]);
+var showQuestion = function () {
+  // hide div with start button
+  startDiv.classList.add("hide");
 
-    // create var to hold length of answerList array
+  // creates a new div to house questions and answers
+  var questionContainer = document.createElement("div");
+  questionContainer.className = "question-container";
+  questionArea.appendChild(questionContainer);
+
+  // creates a div to post question as innerText
+  var postQuestion = document.createElement("div");
+  postQuestion.textContent = questionsArr[currentQuestionIndex].question;
+  postQuestion.className = "question";
+  questionContainer.appendChild(postQuestion);
+
+  // creates a div to hold the possible answers
+  var createQuestionBox = function () {
     var answerListLength = questionsArr[currentQuestionIndex].answerList.length;
-  }
+
+    // creates a div to hold question[i] (index0-3), gives id question-list[i], appends to postAnswerList
+    var createAnswerList = function () {
+      var postAnswerList = document.createElement("div");
+      postAnswerList.textContent =
+        questionsArr[currentQuestionIndex].answerList[i];
+      postAnswerList.className = "question-list";
+      postAnswerList.id = "question-list" + [i];
+      questionContainer.appendChild(postAnswerList);
+
+      // when answer is clicked it is compared with correct answer.
+      postAnswerList.addEventListener("click", function () {
+        // if true (they match) 10 points are added to score and currenQuestionIndex +1
+        if (
+          questionsArr[currentQuestionIndex].correctAnswer ==
+          postAnswerList.textContent
+        ) {
+          score += 10;
+          // go onto next question
+          currentQuestionIndex++;
+          showNextQuestion();
+          console.log(currentQuestionIndex);
+          console.log(score);
+        }
+        // 10 seconds are subtracted from timer, showNextQuestion()
+        else {
+          timeDisp -= 10;
+          currentQuestionIndex++;
+          console.log(currentQuestionIndex);
+          showNextQuestion();
+        }
+      });
+
+      // make showNextQuestion() function that shows another question while getting rid of first question
+      var showNextQuestion = function (timer) {
+        // remove previous quesiton and run function to add new question at currentQuestionIndex
+        if (currentQuestionIndex < questionsArr.length) {
+          questionContainer.parentNode.removeChild(questionContainer);
+          showQuestion();
+        } else if (currentQuestionIndex === questionsArr.length) {
+          timeDisp = 0;
+          questionContainer.classList.add("hide");
+          gameOver();
+        }
+      };
+    };
+    // loops through answerList array, creating each question in the process
+    for (var i = 0; i < answerListLength; i++) {
+      createAnswerList();
+    }
+  };
+  createQuestionBox();
 };
 
 // function to get and save user initials to localStorage for highscore
 var userName = function () {
   var initials = prompt("What are your initials");
-  console.log(initials);
-  console.log(score);
   userScore = [initials, score];
-  console.log(userScore);
   return;
 };
+console.log(JSON.parse(localStorage.getItem(userScore)));
 
-var gameOver = function () {
-  userName();
-  // set score in localStorage
-  localStorage.setItem("userScore", JSON.stringify(userScore));
-
-  // create div to post question to with button to retake quiz
+// post user score to page
+var postUserScore = function () {
   var afterQuiz = document.createElement("div");
   afterQuiz.className = "after-quiz";
   questionArea.appendChild(afterQuiz);
@@ -270,6 +225,16 @@ var gameOver = function () {
   afterQuizScore.className = "after-quiz";
   questionArea.appendChild(afterQuizScore);
   afterQuizScore.textContent = "Score: " + userScore[1];
+
+  startDiv.classList.remove("hide");
+};
+
+// funcition for the end of game
+var gameOver = function () {
+  userName();
+  // set score in localStorage
+  localStorage.setItem("userScore", JSON.stringify(userScore));
+  postUserScore();
 };
 
 // START
@@ -280,6 +245,8 @@ startButtonEl.addEventListener("click", function () {
 
 // function() parameter is placeholder for highscore() once complete
 highscoreButtonEl.addEventListener("click", function () {
-  console.log(userScore);
+  console.log(localStorage.userScore);
+  // gets user score from localStorage and parses it into  the postScore()
   JSON.parse(localStorage.getItem("userScore"));
+  postUserScore();
 });
