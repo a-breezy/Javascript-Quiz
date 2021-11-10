@@ -9,6 +9,7 @@ var timerEl = document.querySelector("#countdownTimer");
 var currentQuestionIndex = 0;
 var score = 0;
 var timeDisp = 90;
+var savedScore = localStorage.getItem("userScore");
 var userScore = [];
 
 // create a list of questions and set as an array with properties: index, question, correct answer
@@ -213,21 +214,20 @@ var userName = function () {
   };
   userScore.push(obj);
 };
-console.log(JSON.parse(localStorage.getItem(userScore)));
 
 // post user score to page
-var postUserScore = function () {
+var postUserScore = function (name, score) {
   var afterQuiz = document.createElement("div");
   afterQuiz.className = "after-quiz";
   questionArea.appendChild(afterQuiz);
   // add innerhtml text so that a line break occurs
-  afterQuiz.textContent = "User Initials: " + userScore[0].name;
+  afterQuiz.textContent = "User Initials: " + name;
 
   // add text content for userScore
   var afterQuizScore = document.createElement("p");
   afterQuizScore.className = "after-quiz";
   questionArea.appendChild(afterQuizScore);
-  afterQuizScore.textContent = "Score: " + userScore[0].postScore;
+  afterQuizScore.textContent = "Score: " + score;
 
   startDiv.classList.remove("hide");
 };
@@ -237,7 +237,7 @@ var gameOver = function () {
   userName();
   // set score in localStorage
   localStorage.setItem("userScore", JSON.stringify(userScore));
-  postUserScore();
+  postUserScore(userScore[0].name, userScore[0].postScore);
 };
 
 // START
@@ -246,8 +246,11 @@ startButtonEl.addEventListener("click", startQuiz);
 
 // function() parameter is placeholder for highscore() once complete
 highscoreButtonEl.addEventListener("click", function () {
-  console.log(localStorage.userScore);
+  console.log(savedScore);
   // gets user score from localStorage and parses it into  the postScore()
-  JSON.parse(localStorage.getItem("userScore"));
-  postUserScore();
+  savedScore;
+  postUserScore(
+    savedScore.userScore[0].name,
+    savedScore.userScore[0].postScore
+  );
 });
