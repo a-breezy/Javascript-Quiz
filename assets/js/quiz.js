@@ -9,7 +9,7 @@ var timerEl = document.querySelector("#countdownTimer");
 var currentQuestionIndex = 0;
 var score = 0;
 var timeDisp = 90;
-var savedScore = localStorage.getItem("userScore");
+var savedScore = JSON.parse(localStorage.getItem("userScore"));
 var userScore = [];
 
 // create a list of questions and set as an array with properties: index, question, correct answer
@@ -246,11 +246,7 @@ startButtonEl.addEventListener("click", startQuiz);
 
 // function() parameter is placeholder for highscore() once complete
 highscoreButtonEl.addEventListener("click", function () {
-  console.log(savedScore);
   // gets user score from localStorage and parses it into  the postScore()
   savedScore;
-  postUserScore(
-    savedScore.userScore[0].name,
-    savedScore.userScore[0].postScore
-  );
+  postUserScore(savedScore[0].name, savedScore[0].postScore);
 });
